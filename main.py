@@ -11,7 +11,7 @@ import sys
 import time
 
 from requests_oauthlib import OAuth1Session
-from SO2MI.Client import *
+from SO2MI.Client import client
 
 # configの読み込み
 if os.path.isfile("config.ini"):
@@ -38,14 +38,15 @@ if __name__ == "__main__":
         resGet = session.post(stream, params=tracker, stream=True)
         for line in resGet.iter_lines():
             print(line.decode("utf-8")) # デバッグ用
-            if line.decode("utf-8") == "Exceeded connection limit for user": # TODO: エラーになったら停止することをツイート
+            if line.decode("utf-8") == "Exceeded connection limit for user":
                 print("制限中")
                 time.sleep(1000) # 17分弱ストップ
                 continue
-            content = json.loads(line.decode("utf-8"))
-            command = content["text"]
-            tweetId = content["id"]
-            if "RT" not in command:
-                reply = testo(command)
-                mention = {"status":reply, "in_reply_to_status_id":tweetId, "auto_populate_reply_metadata":True}
-                resPost = session.post(tweet, params=mention) # TODO: エラー処理/エラーになったら停止することをツイート
+            if line.decode("utf-8") != "":
+                content = json.loads(line.decode("utf-8"))
+                command = content["text"]
+                tweetId = content["id"]
+                if "RT" not in command:
+                    reply = client(command)
+                    mention = {"status":reply, "in_reply_to_status_id":tweetId, "auto_populate_reply_metadata":True}
+                    resPost = session.post(tweet, params=mention)

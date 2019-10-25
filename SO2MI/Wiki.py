@@ -1,0 +1,2 @@
+def funcWiki(itemName):
+    pass

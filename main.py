@@ -48,5 +48,6 @@ if __name__ == "__main__":
                 tweetId = content["id"]
                 if "RT" not in command:
                     reply = client(command)
-                    mention = {"status":reply, "in_reply_to_status_id":tweetId, "auto_populate_reply_metadata":True}
-                    resPost = session.post(tweet, params=mention)
+                    if reply != "":
+                        mention = {"status":reply, "in_reply_to_status_id":tweetId, "auto_populate_reply_metadata":True}
+                        resPost = session.post(tweet, params=mention)

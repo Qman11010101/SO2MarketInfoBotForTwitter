@@ -8,6 +8,7 @@ from configparser import ConfigParser
 import json
 import os
 import sys
+import threading
 import time
 
 from requests_oauthlib import OAuth1Session
@@ -32,6 +33,16 @@ stream = "https://stream.twitter.com/1.1/statuses/filter.json"
 tweet = "https://api.twitter.com/1.1/statuses/update.json"
 
 if __name__ == "__main__":
+    # 定期実行関数定義
+    def regexc():
+        pass
+
+    # デーモンスレッド(定期実行)
+    th = threading.Thread(target=regexc, name="th", args=())
+    th.setDaemon(True)
+    th.start()
+    
+    # メインスレッド(ツイートへの反応)
     session = OAuth1Session(consumerKey, consumerSecret, accessToken, accessTokenSecret)
     tracker = {"track":f"#{tagStr}"}
     while True:

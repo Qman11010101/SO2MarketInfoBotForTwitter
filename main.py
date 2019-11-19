@@ -12,6 +12,7 @@ import threading
 import time
 
 from requests_oauthlib import OAuth1Session
+
 from SO2MI.Client import client
 
 # configの読み込み

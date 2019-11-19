@@ -1,9 +1,9 @@
 from configparser import ConfigParser
 import re
 
-from SO2MI.Market import funcMarket
-from SO2MI.Wiki import funcWiki
-from SO2MI.Shelves import funcShelves
+from .Market import funcMarket
+from .Wiki import funcWiki
+from .Shelves import funcShelves
 
 # config読み込み
 config = ConfigParser()

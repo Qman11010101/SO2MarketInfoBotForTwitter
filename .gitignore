@@ -107,3 +107,6 @@ venv.bak/
 config.ini
 vs.code-workspace
 .vscode/
+api-log/
+error-log/
+*.idea

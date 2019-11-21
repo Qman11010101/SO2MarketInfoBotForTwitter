@@ -14,6 +14,7 @@ import time
 from requests_oauthlib import OAuth1Session
 
 from SO2MI.Client import client
+from SO2MI.Log import logger
 
 # configの読み込み
 if os.path.isfile("config.ini"):
@@ -49,7 +50,7 @@ if __name__ == "__main__":
     while True:
         resGet = session.post(stream, params=tracker, stream=True)
         for line in resGet.iter_lines():
-            print(line.decode("utf-8")) # デバッグ用
+            logger(line.decode("utf-8"), "debug") # デバッグ用
             if line.decode("utf-8") == "Exceeded connection limit for user":
                 print("制限中")
                 time.sleep(1000) # 17分弱ストップ

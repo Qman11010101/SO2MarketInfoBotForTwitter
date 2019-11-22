@@ -5,7 +5,8 @@ from textwrap import dedent
 from .Market import funcMarket
 from .Wiki import funcWiki
 from .Shelves import funcShelves
-from .Exceptions import NoItemError
+from .Exceptions import NoItemError, NoTownError
+from .Log import logger
 
 # config読み込み
 config = ConfigParser()
@@ -44,7 +45,17 @@ def client(text): # TODO: 市場情報関数に渡すコマンドをパースす
 
     # 棚コマンド
     elif command[0] == comShelves:
-        pass
+        if len(command) == 1:
+            logger("テスト")
+            command.append("--all")
+            print(command)
+        try:
+            res = funcShelves(command[1])
+        except NoTownError:
+            res = f"「{command[1]}」という街は見つかりませんでした。"
+        finally:
+            print(res)
+            return res
 
     # バージョンコマンド
     elif command[0] == comVersion:

@@ -5,5 +5,6 @@ from .Shelves import *
 from .Wiki import *
 from .getApi import *
 from .Log import *
+from .Error import *
 
-__all__ = ["client", "getApi", "funcMarket", "funcWiki", "funcShelves", "logger", "NoItemError", "NoTownError"]
+__all__ = ["client", "getApi", "funcMarket", "funcWiki", "funcShelves", "logger", "NoItemError", "NoTownError", "errorWrite"]

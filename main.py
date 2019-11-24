@@ -47,7 +47,6 @@ if __name__ == "__main__":
     # メインスレッド(ツイートへの反応)
     session = OAuth1Session(consumerKey, consumerSecret, accessToken, accessTokenSecret)
     tracker = {"track":f"#{tagStr}"}
-    logger("正常にログインしました")
     while True:
         resGet = session.post(stream, params=tracker, stream=True)
         for line in resGet.iter_lines():
@@ -62,11 +61,8 @@ if __name__ == "__main__":
                 tweetId = content["id"]
                 if "RT" not in command:
                     reply = client(command)
-                    print(reply)
                     if reply != "":
-                        print("正常")
                         mention = {"status":reply, "in_reply_to_status_id":tweetId, "auto_populate_reply_metadata":True}
-                        logger(mention)
                         resPost = session.post(tweet, params=mention)
                         try:
                             logger(resPost["errors"][0]["message"], "error")

@@ -63,6 +63,10 @@ def funcShelves(townName):
     shelfNotBundlePersent = 100 - shelfBundlePercent
     priceNotBundlePercent = 100 - priceBundlePercent
 
+    # 全体のときの文字の入れかえ("--all"→"全体")
+    if townName == "--all":
+        townName = "全体"
+
     # 時刻をsale-*.jsonから推測
     target = glob.glob("api-log/sale-*.json")
     jsonTime = datetime.datetime.strptime(target[0].replace("\\", "/"), "api-log/sale-%y%m%d%H%M.json")

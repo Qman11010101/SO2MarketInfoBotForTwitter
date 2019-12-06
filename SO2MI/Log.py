@@ -46,7 +46,7 @@ def logger(message, level="info"):
     返り値:\n
         str: メッセージの内容です。
     """
-    if os.environ.getboolean("enableLog"):
+    if os.environ.get("enableLog") == "True":
         if level == "debug":
             LOGGER.debug(message)
         elif level == "info":

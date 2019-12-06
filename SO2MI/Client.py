@@ -1,4 +1,5 @@
 from configparser import ConfigParser
+import os
 import re
 from textwrap import dedent
 
@@ -9,25 +10,36 @@ from .Exceptions import NoItemError, NoTownError
 from .Log import logger
 from .Error import errorWrite
 
-# config読み込み
-config = ConfigParser()
-config.read("config.ini")
+# configの読み込み
+if os.path.isfile("config.ini"):
+    config = ConfigParser()
+    config.read("config.ini")
 
-# ハッシュタグ定義
-tagStr = config["misc"]["hashtagStr"]
+    # ハッシュタグ定義
+    tagStr = config["misc"]["hashtagStr"]
 
-# コマンド定義
-comMarket = config["command"]["market"]
-comVersion = config["command"]["version"]
-comHelp = config["command"]["help"]
-comWiki = config["command"]["wiki"]
-comShelves = config["command"]["shelves"]
+    # コマンド定義
+    comMarket = config["command"]["market"]
+    comVersion = config["command"]["version"]
+    comHelp = config["command"]["help"]
+    comWiki = config["command"]["wiki"]
+    comShelves = config["command"]["shelves"]
+else:
+    # ハッシュタグ定義
+    tagStr = os.environ.get("hashtagStr")
+    
+    # コマンド定義
+    comMarket = os.environ.get("market")
+    comVersion = os.environ.get("version")
+    comHelp = os.environ.get("help")
+    comWiki = os.environ.get("wiki")
+    comShelves = os.environ.get("shelves")
 
 # バージョン定義
 DEFVER = "0.1"
 
 # 実行部
-def client(text): # TODO: 市場情報関数に渡すコマンドをパースする処理を書く、返ってきた値をそのままreturnするようにする→Try Catchは？helpとversionは直書き
+def client(text):
     # コマンド文字列パース
     command = text.replace(f"#{tagStr}", "").replace("\n","").split()
     
@@ -69,7 +81,7 @@ def client(text): # TODO: 市場情報関数に渡すコマンドをパースす
                 try:
                     parseRes = funcMarket(command[1], command[2], command[4])
                     if parseRes != False:
-                        res =parseRes
+                        res = parseRes
                     else:
                         res = f"「{command[1]}」は見つかりませんでした。"
                 except NoTownError:

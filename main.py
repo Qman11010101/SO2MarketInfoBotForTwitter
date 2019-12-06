@@ -20,16 +20,24 @@ from SO2MI.Log import logger
 if os.path.isfile("config.ini"):
     config = ConfigParser()
     config.read("config.ini")
-else:
-    print("エラー: 設定ファイルがありません")
-    sys.exit(1) # 異常終了
 
-# APIキー定義
-consumerKey = config["keys"]["consumerKey"]
-consumerSecret = config["keys"]["consumerSecret"]
-accessToken = config["keys"]["accessToken"]
-accessTokenSecret = config["keys"]["accessTokenSecret"]
-tagStr = config["misc"]["hashtagStr"]
+    # APIキー定義
+    consumerKey = config["keys"]["consumerKey"]
+    consumerSecret = config["keys"]["consumerSecret"]
+    accessToken = config["keys"]["accessToken"]
+    accessTokenSecret = config["keys"]["accessTokenSecret"]
+
+    # ハッシュタグ定義
+    tagStr = config["misc"]["hashtagStr"]
+else:
+    # APIキー定義
+    consumerKey = os.environ.get("consumerKey")
+    consumerSecret = os.environ.get("consumerSecret")
+    accessToken = os.environ.get("accessToken")
+    accessTokenSecret = os.environ.get("accessTokenSecret")
+
+    # ハッシュタグ定義
+    tagStr = os.environ.get("hashtagStr")
 
 stream = "https://stream.twitter.com/1.1/statuses/filter.json"
 tweet = "https://api.twitter.com/1.1/statuses/update.json"
@@ -52,7 +60,7 @@ if __name__ == "__main__":
         for line in resGet.iter_lines():
             logger(line.decode("utf-8"), "debug") # デバッグ用
             if line.decode("utf-8") == "Exceeded connection limit for user":
-                print("制限中")
+                logger("制限中です")
                 time.sleep(1000) # 17分弱ストップ
                 continue
             if line.decode("utf-8") != "":

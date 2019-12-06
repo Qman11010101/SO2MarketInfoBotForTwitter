@@ -1,21 +1,26 @@
 from configparser import ConfigParser
 import datetime
+import os
 import sys
 import logging
 
-config = ConfigParser()
-config.read("config.ini")
+if os.path.isfile("config.ini"):
+    config = ConfigParser()
+    config.read("config.ini")
+    level = config["misc"]["logLevel"]
+else:
+    level = os.environ.get("logLevel")
 
 LOGGER = logging.getLogger("SO2MIBOT")
 LOGFORMAT = logging.Formatter("[%(asctime)s] %(levelname)-8s [%(module)s#%(funcName)s %(lineno)d]: %(message)s")
 
-if config["misc"]["logLevel"] == "debug":
+if level == "debug":
     logLevel = logging.DEBUG
-elif config["misc"]["logLevel"] == "info":
+elif level == "info":
     logLevel = logging.INFO
-elif config["misc"]["logLevel"] == "error":
+elif level == "error":
     logLevel = logging.ERROR
-elif config["misc"]["logLevel"] == "critical":
+elif level == "critical":
     logLevel = logging.CRITICAL
 else:
     logLevel = logging.WARNING
@@ -41,7 +46,7 @@ def logger(message, level="info"):
     返り値:\n
         str: メッセージの内容です。
     """
-    if config["misc"].getboolean("enableLog"):
+    if os.environ.getboolean("enableLog"):
         if level == "debug":
             LOGGER.debug(message)
         elif level == "info":

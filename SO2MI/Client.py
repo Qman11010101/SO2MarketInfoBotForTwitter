@@ -104,7 +104,6 @@ def client(text):
     # 棚コマンド
     elif command[0] == comShelves:
         if len(command) == 1:
-            logger("テスト")
             command.append("--all")
             print(command)
         try:

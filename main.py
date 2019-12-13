@@ -5,6 +5,7 @@
 # License: MIT License
 
 from configparser import ConfigParser
+import datetime
 import json
 import os
 import sys
@@ -52,7 +53,18 @@ if __name__ == "__main__":
         # ・ランキング上位数人
         # ・月末月始の優待券使用奨励
         # 定期ツイートは8時/12時/16時/20時
-        pass
+        while True:
+            time.sleep(300) # 5分ごとにチェック
+            if 8: # TODO: あとでしっかり書く
+                print("8時の処理")
+            elif 12:
+                print("12時の処理")
+            elif 16:
+                print("16時の処理")
+            elif 20:
+                print("20時の処理")
+            else:
+                pass
 
     # メイン関数定義
     def mainfunc():

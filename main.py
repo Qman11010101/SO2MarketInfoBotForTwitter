@@ -87,6 +87,7 @@ if __name__ == "__main__":
                     content = json.loads(line.decode("utf-8"))
                     command = content["text"]
                     tweetId = content["id"]
+                    logger(f"{content['user']['name']} (@{content['user']['screen_name']}): {content['text']}")
                     if "RT" not in command:
                         reply = client(command)
                         if reply != "":

@@ -55,13 +55,19 @@ if __name__ == "__main__":
         # 定期ツイートは8時/12時/16時/20時
         while True:
             time.sleep(300) # 5分ごとにチェック
-            if 8: # TODO: あとでしっかり書く
+
+            # 時間取得
+            hour = datetime.datetime.now().hour
+            minu = datetime.datetime.now().minute
+
+            # 分岐
+            if hour == 8 and 0 <= minu <= 5:
                 print("8時の処理")
-            elif 12:
+            elif hour == 12 and 0 <= minu <= 5:
                 print("12時の処理")
-            elif 16:
+            elif hour == 16 and 0 <= minu <= 5:
                 print("16時の処理")
-            elif 20:
+            elif hour == 20 and 0 <= minu <= 5:
                 print("20時の処理")
             else:
                 pass

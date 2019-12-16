@@ -79,7 +79,6 @@ if __name__ == "__main__":
         while True:
             resGet = session.post(stream, params=tracker, stream=True)
             for line in resGet.iter_lines():
-                logger(line.decode("utf-8"), "debug") # デバッグ用
                 if line.decode("utf-8") == "Exceeded connection limit for user":
                     logger("制限中です")
                     time.sleep(1000) # 17分弱ストップ
@@ -96,6 +95,7 @@ if __name__ == "__main__":
                             try:
                                 logger(resPost["errors"][0]["message"], "error")
                             except:
+                                logger("投稿完了しました")
                                 pass
 
     # 定期実行スレッドのデーモン化

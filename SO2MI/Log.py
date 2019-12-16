@@ -12,7 +12,7 @@ else:
     level = os.environ.get("logLevel")
 
 LOGGER = logging.getLogger("SO2MIBOT")
-LOGFORMAT = logging.Formatter("[%(asctime)s] %(levelname)-8s [%(module)s#%(funcName)s %(lineno)d]: %(message)s")
+LOGFORMAT = logging.Formatter("[%(asctime)s] %(levelname)-8s >>> %(message)s")
 
 if level == "debug":
     logLevel = logging.DEBUG

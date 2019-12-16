@@ -62,13 +62,13 @@ if __name__ == "__main__":
 
             # 分岐
             if hour == 8 and 0 <= minu <= 5:
-                print("8時の処理")
+                logger("8時の処理", "debug")
             elif hour == 12 and 0 <= minu <= 5:
-                print("12時の処理")
+                logger("12時の処理", "debug")
             elif hour == 16 and 0 <= minu <= 5:
-                print("16時の処理")
+                logger("16時の処理", "debug")
             elif hour == 20 and 0 <= minu <= 5:
-                print("20時の処理")
+                logger("20時の処理", "debug")
             else:
                 pass
 

@@ -36,7 +36,7 @@ else:
     comShelves = os.environ.get("shelves")
 
 # バージョン定義
-DEFVER = "0.1"
+DEFVER = "0.2"
 
 # 実行部
 def client(text):

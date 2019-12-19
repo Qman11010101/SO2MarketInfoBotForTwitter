@@ -62,19 +62,19 @@ if __name__ == "__main__":
 
             # 分岐
             if hour == 8 and 0 <= minu <= 5:
-                logger("8時の処理", "debug")
+                logger("8時の処理を開始します", "debug")
+
             elif hour == 12 and 0 <= minu <= 5:
-                logger("12時の処理", "debug")
+                logger("12時の処理を開始します", "debug")
             elif hour == 16 and 0 <= minu <= 5:
-                logger("16時の処理", "debug")
+                logger("16時の処理を開始します", "debug")
             elif hour == 20 and 0 <= minu <= 5:
-                logger("20時の処理", "debug")
+                logger("20時の処理を開始します", "debug")
             else:
                 pass
 
     # メイン関数定義
     def mainfunc():
-        session = OAuth1Session(consumerKey, consumerSecret, accessToken, accessTokenSecret)
         tracker = {"track":f"#{tagStr}"}
         while True:
             resGet = session.post(stream, params=tracker, stream=True)
@@ -102,6 +102,9 @@ if __name__ == "__main__":
     # 定期実行スレッドのデーモン化
     th = threading.Thread(target=regexc, name="th", args=())
     th.setDaemon(True)
+
+    # セッション生成
+    session = OAuth1Session(consumerKey, consumerSecret, accessToken, accessTokenSecret)
 
     # 実行
     mainfunc()

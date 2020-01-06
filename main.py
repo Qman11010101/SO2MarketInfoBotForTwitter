@@ -63,7 +63,7 @@ if __name__ == "__main__":
             # 分岐
             if hour == 8 and 0 <= minu <= 5:
                 logger("8時の処理を開始します", "debug")
-
+                
             elif hour == 12 and 0 <= minu <= 5:
                 logger("12時の処理を開始します", "debug")
             elif hour == 16 and 0 <= minu <= 5:

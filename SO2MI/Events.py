@@ -108,7 +108,8 @@ def funcEvent():
                 eventComeText.append(evtxt)
 
         eventText = eventHeldText + eventComeText
-        return eventText
+        with open("event.txt", "w", encoding="utf-8_sig") as evtxtarr:
+            evtxtarr.write(str(eventText))
     except:
         traceback.print_exc()
         return False

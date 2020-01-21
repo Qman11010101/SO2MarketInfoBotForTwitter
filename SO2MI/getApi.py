@@ -32,6 +32,7 @@ def getApi(apiName, url):
     if os.path.isfile("config.ini"):
         config = configparser.ConfigParser()
         config.read("config.ini")
+    
         tz = config["misc"]["timezone"]
     else:
         tz = os.environ.get("timezone")

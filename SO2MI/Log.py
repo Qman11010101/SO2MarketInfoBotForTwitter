@@ -7,6 +7,7 @@ import logging
 if os.path.isfile("config.ini"):
     config = ConfigParser()
     config.read("config.ini")
+
     level = config["misc"]["logLevel"]
 else:
     level = os.environ.get("logLevel")

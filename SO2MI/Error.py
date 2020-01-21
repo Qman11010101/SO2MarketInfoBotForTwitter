@@ -8,6 +8,7 @@ from pytz import timezone
 if os.path.isfile("config.ini"):
     config = ConfigParser()
     config.read("config.ini")
+
     tz = config["misc"]["timezone"]
 else:
     tz = os.environ.get("timezone")

@@ -15,6 +15,7 @@ from bs4 import BeautifulSoup
 if os.path.isfile("config.ini"):
     config = ConfigParser()
     config.read("config.ini")
+    
     regEventDay = config["misc"]["RegEventDay"]
     tz = config["misc"]["timezone"]
 else:

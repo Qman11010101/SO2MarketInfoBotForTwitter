@@ -1,3 +1,5 @@
+import os, glob
+
 from .Client import *
 from .Market import *
 from .Exceptions import *
@@ -8,4 +10,4 @@ from .Log import *
 from .Error import *
 from .Events import *
 
-__all__ = ["client", "getApi", "funcMarket", "funcWiki", "funcShelves", "logger", "NoItemError", "NoTownError", "errorWrite", "funcEvent"]
+__all__ = [os.path.split(os.path.splitext(file)[0])[1] for file in glob.glob(os.path.join(os.path.dirname(__file__), '[a-zA-Z0-9]*.py'))]

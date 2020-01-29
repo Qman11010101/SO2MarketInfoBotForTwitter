@@ -10,7 +10,6 @@ from .Exceptions import NoItemError, NoTownError
 from .Log import logger
 from .Error import errorWrite
 
-# configの読み込み
 if os.path.isfile("config.ini"):
     config = ConfigParser()
     config.read("config.ini")

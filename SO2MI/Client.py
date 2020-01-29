@@ -14,30 +14,24 @@ if os.path.isfile("config.ini"):
     config = ConfigParser()
     config.read("config.ini")
 
-    # ハッシュタグ定義
     tagStr = config["misc"]["hashtagStr"]
 
-    # コマンド定義
     comMarket = config["command"]["market"]
     comVersion = config["command"]["version"]
     comHelp = config["command"]["help"]
     comWiki = config["command"]["wiki"]
     comShelves = config["command"]["shelves"]
 else:
-    # ハッシュタグ定義
     tagStr = os.environ.get("hashtagStr")
-    
-    # コマンド定義
+
     comMarket = os.environ.get("market")
     comVersion = os.environ.get("version")
     comHelp = os.environ.get("help")
     comWiki = os.environ.get("wiki")
     comShelves = os.environ.get("shelves")
 
-# バージョン定義
 DEFVER = "0.2"
 
-# 実行部
 def client(text):
     # コマンド文字列パース
     command = text.replace(f"#{tagStr}", "").replace("\n","").split()

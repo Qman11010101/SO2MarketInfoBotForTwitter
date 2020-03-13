@@ -1,12 +1,12 @@
+import textwrap
+import datetime
+import glob
+from collections import Counter
+
+from .getApi import getApi
+from .Exceptions import NoTownError
+
 def funcShelves(townName):
-    import textwrap
-    import datetime
-    import glob
-    from collections import Counter
-
-    from .getApi import getApi
-    from .Exceptions import NoTownError
-
     # API取得部
     town = getApi("town", "https://so2-api.mutoys.com/master/area.json")
     sale = getApi("sale", "https://so2-api.mutoys.com/json/sale/all.json")

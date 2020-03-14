@@ -9,6 +9,7 @@ from .Shelves import funcShelves
 from .Exceptions import NoItemError, NoTownError
 from .Log import logger
 from .Error import errorWrite
+from .Density import funcDensity
 
 if os.path.isfile("config.ini"):
     config = ConfigParser()
@@ -21,6 +22,7 @@ if os.path.isfile("config.ini"):
     comHelp = config["command"]["help"]
     comWiki = config["command"]["wiki"]
     comShelves = config["command"]["shelves"]
+    comDensity = config["command"]["density"]
 else:
     tagStr = os.environ.get("hashtagStr")
 
@@ -29,6 +31,7 @@ else:
     comHelp = os.environ.get("help")
     comWiki = os.environ.get("wiki")
     comShelves = os.environ.get("shelves")
+    comDensity = os.environ.get("density")
 
 DEFVER = "0.2"
 
@@ -98,13 +101,11 @@ def client(text):
     elif command[0] == comShelves:
         if len(command) == 1:
             command.append("--all")
-            print(command)
         try:
             res = funcShelves(command[1])
         except NoTownError:
             res = f"「{command[1]}」という街は見つかりませんでした。"
         finally:
-            print(res)
             return res
 
     # バージョンコマンド
@@ -116,6 +117,17 @@ def client(text):
     elif command[0] == comHelp:
         resStr = f"以下のコマンドが使用可能です:\n{comMarket}\n{comVersion}\n{comHelp}\n{comWiki}\n{comShelves}\n\n各コマンドの詳細は以下のURLを参照してください。"
         return resStr
+
+    # 人口密度コマンド
+    elif command[0] == comDensity:
+        if len(command) == 1:
+            command.append("--all")
+        try:
+            res = funcDensity(command[1])
+        except NoTownError:
+            res = f"「{command[1]}」という街は見つかりませんでした。"
+        finally:
+            return res
 
     # 全てに該当しない場合
     else:

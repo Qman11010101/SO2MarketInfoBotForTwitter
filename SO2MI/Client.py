@@ -63,7 +63,7 @@ def client(text):
                     command.insert(3, "-t")
                     command.insert(4, "none")
                 else: # [-t]のときの処理
-                    # 街の名前を参照したとき引数の形が出てきたら街が指定されていない
+                    # 街の名前を参照したとき引数の形が出てきたら、次の引数を打っているので街が指定されていない
                     if re.match(r"^(-[a-zA-Z]|--[a-zA-Z]+)$", command[4]):
                         return "エラー: 引数-tに対して街の名前が指定されていません。"
                     else:
@@ -119,7 +119,7 @@ def client(text):
 
     # 全てに該当しない場合
     else:
-        if re.match(r"[^a-zA-Z]*", command[0]): # 半角ラテンアルファベットが含まれていない場合
+        if re.match(r"[^a-zA-Z]", command[0]): # 半角ラテンアルファベットが含まれていない場合
             return "" # 無視するようにする(コマンドを打つ気がないと判断)
         else:
             return f"Error: {command[0]}というコマンドは存在しません。"

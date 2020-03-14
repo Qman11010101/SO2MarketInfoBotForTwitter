@@ -17,29 +17,23 @@ from requests_oauthlib import OAuth1Session
 from SO2MI.Client import client
 from SO2MI.Log import logger
 
-# configの読み込み
 if os.path.isfile("config.ini"):
     config = ConfigParser()
     config.read("config.ini")
 
-    # APIキー定義
     consumerKey = config["keys"]["consumerKey"]
     consumerSecret = config["keys"]["consumerSecret"]
     accessToken = config["keys"]["accessToken"]
     accessTokenSecret = config["keys"]["accessTokenSecret"]
 
-    # ハッシュタグ定義
     tagStr = config["misc"]["hashtagStr"]
 
-# 環境変数の読み込み
 else:
-    # APIキー定義
     consumerKey = os.environ.get("consumerKey")
     consumerSecret = os.environ.get("consumerSecret")
     accessToken = os.environ.get("accessToken")
     accessTokenSecret = os.environ.get("accessTokenSecret")
 
-    # ハッシュタグ定義
     tagStr = os.environ.get("hashtagStr")
 
 stream = "https://stream.twitter.com/1.1/statuses/filter.json"
@@ -63,7 +57,6 @@ if __name__ == "__main__":
             # 分岐
             if hour == 8 and 0 <= minu <= 5:
                 logger("8時の処理を開始します", "debug")
-                
             elif hour == 12 and 0 <= minu <= 5:
                 logger("12時の処理を開始します", "debug")
             elif hour == 16 and 0 <= minu <= 5:
@@ -81,7 +74,7 @@ if __name__ == "__main__":
             for line in resGet.iter_lines():
                 if line.decode("utf-8") == "Exceeded connection limit for user":
                     logger("制限中です")
-                    time.sleep(1000) # 17分弱ストップ
+                    time.sleep(1000)
                     continue
                 if line.decode("utf-8") != "":
                     content = json.loads(line.decode("utf-8"))

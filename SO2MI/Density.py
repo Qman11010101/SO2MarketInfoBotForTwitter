@@ -25,7 +25,7 @@ def funcDensity(townName):
         if population[col]["area_id"] == townId:
             townPopulation = population[col]["unit"]
             break
-    townArea = town[str(townId)]["pos_x"] * town[str(townId)]["pos_y"]
+    townArea = town[str(townId)]["width"] * town[str(townId)]["height"]
     townDensity = townPopulation / townArea
 
     # 時刻をtown-*.jsonから推測

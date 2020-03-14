@@ -122,4 +122,4 @@ def client(text):
         if re.match(r"[^a-zA-Z]", command[0]): # 半角ラテンアルファベットが含まれていない場合
             return "" # 無視するようにする(コマンドを打つ気がないと判断)
         else:
-            return f"Error: {command[0]}というコマンドは存在しません。"
+            return f"エラー: {command[0]}というコマンドは存在しません。"

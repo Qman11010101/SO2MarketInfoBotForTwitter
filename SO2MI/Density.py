@@ -10,16 +10,13 @@ def funcDensity(townName):
     town = getApi("town", "https://so2-api.mutoys.com/master/area.json")
 
     # 街ID取得
-    if townName != "--all":
-        townId = 0
-        for col in town:
-            if town[col]["name"] == townName:
-                townId = int(town[col]["area_id"])
-                break
-        if int(townId) == 0:
-            raise NoTownError("such town does not exists")
-    else:
-        return "引数--allにはまだ対応していません。ご了承ください。"
+    townId = 0
+    for col in town:
+        if town[col]["name"] == townName:
+            townId = int(town[col]["area_id"])
+            break
+    if int(townId) == 0:
+        raise NoTownError("such town does not exists")
 
     for col in range(len(population)):
         if population[col]["area_id"] == townId:

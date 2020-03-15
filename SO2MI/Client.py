@@ -33,7 +33,7 @@ else:
     comShelves = os.environ.get("shelves")
     comDensity = os.environ.get("density")
 
-DEFVER = "0.2"
+DEFVER = "0.3"
 
 def client(text):
     # コマンド文字列パース
@@ -79,12 +79,12 @@ def client(text):
                     if parseRes != False:
                         res = parseRes
                     else:
-                        res = f"「{command[1]}」は見つかりませんでした。"
+                        res = f"エラー: 「{command[1]}」は見つかりませんでした。"
                 except NoTownError:
                     res = f"エラー: 「{command[4]}」という街は見つかりませんでした。"
                 except:
                     errorWrite()
-                    res = "不明なエラーが発生しました。管理者にお問い合わせください。"
+                    res = "不明なエラーが発生しました。管理者に問い合わせてください。"
                 finally:
                     return res
 
@@ -93,7 +93,10 @@ def client(text):
         try:
             res = funcWiki(command[1])
         except NoItemError:
-            res = f"「{command[1]}」というアイテムは見つかりませんでした。"
+            res = f"エラー: 「{command[1]}」というアイテムは見つかりませんでした。"
+        except:
+            errorWrite()
+            res = "不明なエラーが発生しました。管理者に問い合わせてください。"
         finally:
             return res
 
@@ -104,7 +107,10 @@ def client(text):
         try:
             res = funcShelves(command[1])
         except NoTownError:
-            res = f"「{command[1]}」という街は見つかりませんでした。"
+            res = f"エラー: 「{command[1]}」という街は見つかりませんでした。"
+        except:
+            errorWrite()
+            res = "不明なエラーが発生しました。管理者に問い合わせてください。"
         finally:
             return res
 
@@ -115,17 +121,17 @@ def client(text):
 
     # ヘルプコマンド
     elif command[0] == comHelp:
-        resStr = f"以下のコマンドが使用可能です:\n{comMarket}\n{comVersion}\n{comHelp}\n{comWiki}\n{comShelves}\n\n各コマンドの詳細は以下のURLを参照してください。"
+        resStr = f"以下のコマンドが使用可能です:\n{comMarket}\n{comVersion}\n{comHelp}\n{comWiki}\n{comShelves}\n{comDensity}\n\n各コマンドの詳細は以下のURLを参照してください。"
         return resStr
 
     # 人口密度コマンド
     elif command[0] == comDensity:
         if len(command) == 1:
-            command.append("--all")
+            return "エラー: 街名が指定されていません。"
         try:
             res = funcDensity(command[1])
         except NoTownError:
-            res = f"「{command[1]}」という街は見つかりませんでした。"
+            res = f"エラー: 「{command[1]}」という街は見つかりませんでした。"
         finally:
             return res
 

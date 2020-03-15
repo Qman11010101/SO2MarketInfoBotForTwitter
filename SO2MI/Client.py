@@ -127,11 +127,18 @@ def client(text):
     # 人口密度コマンド
     elif command[0] == comDensity:
         if len(command) == 1:
-            return "エラー: 街名が指定されていません。"
+            pass # TODO: ヘルプを入れる
+        else:
+            if command[2] != "-p":
+                return f"エラー: '{command[2]}'は不正な引数です。"
+
         try:
-            res = funcDensity(command[1])
+            res = funcDensity(command[1], command[2])
         except NoTownError:
             res = f"エラー: 「{command[1]}」という街は見つかりませんでした。"
+        except:
+            errorWrite()
+            res = "不明なエラーが発生しました。管理者に問い合わせてください。"
         finally:
             return res
 

@@ -24,7 +24,7 @@ def funcDensity(townName, argument=""):
     townArea = town[str(townId)]["width"] * town[str(townId)]["height"]
     if argument == "-p":
         for col in range(len(shopcount)):
-            if shopcount[col]["area_id"] == townId:
+            if shopcount["areas"][col]["area_id"] == townId:
                 townShopCount = shopcount[col]["count"]
                 break
         townDensity = townShopCount / townArea

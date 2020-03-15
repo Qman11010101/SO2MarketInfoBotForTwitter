@@ -128,10 +128,11 @@ def client(text):
     elif command[0] == comDensity:
         if len(command) == 1:
             pass # TODO: ヘルプを入れる
-        else:
-            if len(command) == 3:
-                if command[2] != "-p":
-                    return f"エラー: '{command[2]}'は不正な引数です。"
+        elif len(command) == 2:
+            command.append("-n")
+        elif len(command) == 3:
+            if command[2] != "-p":
+                return f"エラー: '{command[2]}'は不正な引数です。"
 
         try:
             res = funcDensity(command[1], command[2])

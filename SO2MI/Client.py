@@ -85,7 +85,7 @@ def client(text):
             res = f"エラー: 「{command[4]}」という街は見つかりませんでした。"
         except:
             errorWrite()
-            res = "不明なエラーが発生しました。管理者に問い合わせてください。"
+            res = "不明なエラーが発生しました。管理者キューマン・エノビクトに問い合わせてください。"
         finally:
             return res
 
@@ -99,7 +99,7 @@ def client(text):
             res = f"エラー: 「{command[1]}」というアイテムは見つかりませんでした。"
         except:
             errorWrite()
-            res = "不明なエラーが発生しました。管理者に問い合わせてください。"
+            res = "不明なエラーが発生しました。管理者キューマン・エノビクトに問い合わせてください。"
         finally:
             return res
 
@@ -113,13 +113,13 @@ def client(text):
             res = f"エラー: 「{command[1]}」という街は見つかりませんでした。"
         except:
             errorWrite()
-            res = "不明なエラーが発生しました。管理者に問い合わせてください。"
+            res = "不明なエラーが発生しました。管理者キューマン・エノビクトに問い合わせてください。"
         finally:
             return res
 
     # バージョンコマンド
     elif command[0] == comVersion:
-        resStr = f"SOLD OUT 2 市場情報bot for Twitter\nバージョン: {DEFVER}\n開発者: キューマン・エノビクト"
+        resStr = f"SOLD OUT 2 市場情報bot for Twitter\nバージョン: {DEFVER}\n開発者/管理者: キューマン・エノビクト"
         return resStr
 
     # ヘルプコマンド
@@ -143,7 +143,7 @@ def client(text):
             res = f"エラー: 「{command[1]}」という街は見つかりませんでした。"
         except:
             errorWrite()
-            res = "不明なエラーが発生しました。管理者に問い合わせてください。"
+            res = "不明なエラーが発生しました。管理者キューマン・エノビクトに問い合わせてください。"
         finally:
             return res
 
@@ -165,4 +165,4 @@ def funcHelp(command):
     elif command == comDensity:
         return "使用方法: density [街名] [-p]\n詳細は以下のドキュメントをご確認ください。\nhttps://qmainconts.f5.si/document/so2bot.html"
     else:
-        return "不明なエラーが発生しました。管理者に問い合わせてください。"
+        return "不明なエラーが発生しました。管理者キューマン・エノビクトに問い合わせてください。"

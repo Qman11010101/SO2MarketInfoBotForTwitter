@@ -44,7 +44,7 @@ def client(text):
         if len(command) == 1:
             return funcHelp(command[0])
         elif len(command) == 2: # 商品名が1つの場合
-            command.extend(["-n", "none", "--end"])
+            command.extend(["-n", "-n", "none", "--end"])
         else:
             if command[-1] != "--end":
                 command.append("--end") # 終端引数を追加する

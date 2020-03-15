@@ -33,7 +33,7 @@ else:
     comShelves = os.environ.get("shelves")
     comDensity = os.environ.get("density")
 
-DEFVER = "0.3"
+DEFVER = "0.4"
 
 def client(text):
     # コマンド文字列パース
@@ -41,8 +41,9 @@ def client(text):
     
     # 市場情報コマンド
     if command[0] == comMarket:
-        # 商品名が1つの場合
         if len(command) == 1:
+            return funcHelp(command[0])
+        elif len(command) == 2: # 商品名が1つの場合
             command.extend(["-n", "none", "--end"])
         else:
             if command[-1] != "--end":
@@ -74,22 +75,24 @@ def client(text):
                         if not re.match(r"^(-[a-zA-Z]|--[a-zA-Z]+)$", command[5]):
                             return "エラー: 引数-tに対して街を複数指定することはできません。"
                 
-                try:
-                    parseRes = funcMarket(command[1], command[2], command[4])
-                    if parseRes != False:
-                        res = parseRes
-                    else:
-                        res = f"エラー: 「{command[1]}」は見つかりませんでした。"
-                except NoTownError:
-                    res = f"エラー: 「{command[4]}」という街は見つかりませんでした。"
-                except:
-                    errorWrite()
-                    res = "不明なエラーが発生しました。管理者に問い合わせてください。"
-                finally:
-                    return res
+        try:
+            parseRes = funcMarket(command[1], command[2], command[4])
+            if parseRes != False:
+                res = parseRes
+            else:
+                res = f"エラー: 「{command[1]}」は見つかりませんでした。"
+        except NoTownError:
+            res = f"エラー: 「{command[4]}」という街は見つかりませんでした。"
+        except:
+            errorWrite()
+            res = "不明なエラーが発生しました。管理者に問い合わせてください。"
+        finally:
+            return res
 
     # Wikiコマンド
     elif command[0] == comWiki:
+        if len(command) == 1:
+            return funcHelp(command[0])
         try:
             res = funcWiki(command[1])
         except NoItemError:
@@ -127,7 +130,7 @@ def client(text):
     # 人口密度コマンド
     elif command[0] == comDensity:
         if len(command) == 1:
-            pass # TODO: ヘルプを入れる
+            return funcHelp(command[0])
         elif len(command) == 2:
             command.append("-n")
         elif len(command) == 3:
@@ -150,3 +153,16 @@ def client(text):
             return "" # 無視するようにする(コマンドを打つ気がないと判断)
         else:
             return f"エラー: {command[0]}というコマンドは存在しません。"
+
+# ヘルプ用関数
+def funcHelp(command):
+    # 市場情報コマンド
+    if command == comMarket:
+        return "使用方法: market [商品名] [-r] [-t 街名]\n詳細は以下のドキュメントをご確認ください。\nhttps://qmainconts.f5.si/document/so2bot.html"
+    # Wikiコマンド
+    elif command == comWiki:
+        return "使用方法: wiki [商品名]\n詳細は以下のドキュメントをご確認ください。\nhttps://qmainconts.f5.si/document/so2bot.html"
+    elif command == comDensity:
+        return "使用方法: density [街名] [-p]\n詳細は以下のドキュメントをご確認ください。\nhttps://qmainconts.f5.si/document/so2bot.html"
+    else:
+        return "不明なエラーが発生しました。管理者に問い合わせてください。"

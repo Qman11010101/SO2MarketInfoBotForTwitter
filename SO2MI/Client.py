@@ -121,7 +121,7 @@ def client(text):
 
     # ヘルプコマンド
     elif command[0] == comHelp:
-        resStr = f"以下のコマンドが使用可能です:\n{comMarket}\n{comVersion}\n{comHelp}\n{comWiki}\n{comShelves}\n{comDensity}\n\n各コマンドの詳細は以下のURLを参照してください。"
+        resStr = f"以下のコマンドが使用可能です:\n{comMarket}\n{comVersion}\n{comHelp}\n{comWiki}\n{comShelves}\n{comDensity}\n\n各コマンドの詳細は以下のURLを参照してください。\nhttps://qmainconts.f5.si/document/so2bot.html"
         return resStr
 
     # 人口密度コマンド

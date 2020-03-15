@@ -129,8 +129,9 @@ def client(text):
         if len(command) == 1:
             pass # TODO: ヘルプを入れる
         else:
-            if command[2] != "-p":
-                return f"エラー: '{command[2]}'は不正な引数です。"
+            if len(command) == 3:
+                if command[2] != "-p":
+                    return f"エラー: '{command[2]}'は不正な引数です。"
 
         try:
             res = funcDensity(command[1], command[2])

@@ -33,7 +33,7 @@ else:
     comShelves = os.environ.get("shelves")
     comDensity = os.environ.get("density")
 
-DEFVER = "0.4"
+DEFVER = "0.5α"
 
 def client(text):
     # コマンド文字列パース

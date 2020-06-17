@@ -16,7 +16,7 @@ if os.path.isfile("config.ini"):
     config = ConfigParser()
     config.read("config.ini")
     
-    regEventDay = config["misc"]["RegEventDay"]
+    regEventDay = config["misc"]["regEventDay"]
     tz = config["misc"]["timezone"]
 else:
     regEventDay = os.environ.get("regEventDay")
@@ -109,8 +109,7 @@ def funcEvent():
                 eventComeText.append(evtxt)
 
         eventText = eventHeldText + eventComeText
-        with open("event.txt", "w", encoding="utf-8_sig") as evtxtarr:
-            evtxtarr.write(str(eventText))
+        return eventText
     except:
         traceback.print_exc()
         return False

@@ -5,6 +5,7 @@
 # License: MIT License
 
 from configparser import ConfigParser
+import asyncio
 import datetime
 import json
 import os
@@ -16,6 +17,7 @@ from requests_oauthlib import OAuth1Session
 
 from SO2MI.Client import client
 from SO2MI.Log import logger
+from SO2MI.Events import funcEvent
 
 if os.path.isfile("config.ini"):
     config = ConfigParser()
@@ -48,6 +50,7 @@ if __name__ == "__main__":
         # ・月末月始の優待券使用奨励
         # 定期ツイートは8時/12時/16時/20時
         while True:
+            logger("定期投稿システム実行中", "debug")
             time.sleep(300) # 5分ごとにチェック
 
             # 時間取得
@@ -57,6 +60,13 @@ if __name__ == "__main__":
             # 分岐
             if hour == 8 and 0 <= minu <= 5:
                 logger("8時の処理を開始します", "debug")
+                # イベント投稿(1日1回)
+                res = funcEvent()
+                if ler := len(res):
+                    for post in range(min(5, ler)):
+                        content = {"status": res[post]}
+                        resPost = session.post(tweet, params=content)
+                        asyncio.sleep(5)
             elif hour == 12 and 0 <= minu <= 5:
                 logger("12時の処理を開始します", "debug")
             elif hour == 16 and 0 <= minu <= 5:

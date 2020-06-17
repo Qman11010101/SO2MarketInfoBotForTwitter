@@ -111,3 +111,5 @@ api-log/
 error-log/
 *.idea
 move.bat
+agenda.json
+event.txt

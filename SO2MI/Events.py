@@ -16,7 +16,7 @@ if os.path.isfile("config.ini"):
     config = ConfigParser()
     config.read("config.ini")
     
-    regEventDay = config["misc"]["RegEventDay"]
+    regEventDay = config["misc"]["regEventDay"]
     tz = config["misc"]["timezone"]
 else:
     regEventDay = os.environ.get("regEventDay")

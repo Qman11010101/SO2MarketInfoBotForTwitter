@@ -60,19 +60,19 @@ if __name__ == "__main__":
             # 分岐
             if hour == 8 and 0 <= minu <= 5:
                 logger("8時の処理を開始します", "debug")
-                # イベント投稿(1日1回)
-                res = funcEvent()
-                if ler := len(res):
-                    for post in range(min(5, ler)):
-                        content = {"status": res[post]}
-                        resPost = session.post(tweet, params=content)
-                        asyncio.sleep(5)
             elif hour == 12 and 0 <= minu <= 5:
                 logger("12時の処理を開始します", "debug")
             elif hour == 16 and 0 <= minu <= 5:
                 logger("16時の処理を開始します", "debug")
             elif hour == 20 and 0 <= minu <= 5:
                 logger("20時の処理を開始します", "debug")
+                # イベント投稿(1日1回)
+                res = funcEvent()
+                if len(res):
+                    for post in range(min(5, len(res))):
+                        content = {"status": res[post]}
+                        resPost = session.post(tweet, params=content)
+                        asyncio.sleep(5)
             else:
                 pass
 

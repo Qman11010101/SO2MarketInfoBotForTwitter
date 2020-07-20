@@ -110,5 +110,5 @@ if __name__ == "__main__":
     session = OAuth1Session(consumerKey, consumerSecret, accessToken, accessTokenSecret)
 
     # 実行
-    mainfunc()
     th.start()
+    mainfunc()

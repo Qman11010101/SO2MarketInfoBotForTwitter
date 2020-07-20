@@ -51,7 +51,7 @@ if __name__ == "__main__":
         # 定期ツイートは8時/12時/16時/20時
         while True:
             print("定期実行システム作動中")
-            time.sleep(300) # 5分ごとにチェック
+            asyncio.sleep(300) # 5分ごとにチェック
 
             # 時間取得
             hour = datetime.datetime.now().hour

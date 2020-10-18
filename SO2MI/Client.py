@@ -173,7 +173,7 @@ def client(text):
                     elif command[1] == "-n":
                         shopName = command[2]
                         try:
-                            res = funcShopFromName(ownerID)
+                            res = funcShopFromName(shopName)
                         except NoShopError:
                             res = f"エラー: '{shopName}'という名前の店舗は見つかりませんでした。"
             else:

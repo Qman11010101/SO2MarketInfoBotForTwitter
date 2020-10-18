@@ -6,10 +6,11 @@ from textwrap import dedent
 from .Market import funcMarket
 from .Wiki import funcWiki
 from .Shelves import funcShelves
-from .Exceptions import NoItemError, NoTownError
+from .Exceptions import NoItemError, NoTownError, NoShopError
 from .Log import logger
 from .Error import errorWrite
 from .Density import funcDensity
+from .Shop import funcShopFromID
 
 if os.path.isfile("config.ini"):
     config = ConfigParser()
@@ -23,6 +24,7 @@ if os.path.isfile("config.ini"):
     comWiki = config["command"]["wiki"]
     comShelves = config["command"]["shelves"]
     comDensity = config["command"]["density"]
+    comShop = config["command"]["shop"]
 else:
     tagStr = os.environ.get("hashtagStr")
 
@@ -32,8 +34,9 @@ else:
     comWiki = os.environ.get("wiki")
     comShelves = os.environ.get("shelves")
     comDensity = os.environ.get("density")
+    comShop = os.environ.get("shop")
 
-DEFVER = "0.5α"
+DEFVER = "0.5.1α"
 
 def client(text):
     # コマンド文字列パース
@@ -146,6 +149,32 @@ def client(text):
             res = "不明なエラーが発生しました。管理者キューマン・エノビクトに問い合わせてください。"
         finally:
             return res
+    
+    # 店舗情報コマンド
+    elif command[0] == comShop:
+        if len(command) == 1:
+            return funcHelp(command[0])
+        elif len(command) != 3:
+            return "エラー: コマンドの形式が不正です。"
+        else:
+            if re.match(r"^(-[a-zA-Z]|--[a-zA-Z]+)$", command[1]): # 引数の形判定
+                if command[1] not in ("-i", "-n"):# ここに最初の引数になる可能性のあるものを追加していく
+                    res = f"エラー: '{command[1]}'は不正な引数です。"
+                else:
+                    if command[1] == "-i":
+                        try:
+                            ownerID = int(command[2])
+                            try:
+                                res = funcShopFromID(ownerID)
+                            except NoShopError:
+                                res = f"エラー: オーナー番号'{ownerID}'の店舗は見つかりませんでした。"
+                        except ValueError:
+                            res = "エラー: IDは半角数字で入力してください。"
+                    else:
+                        res = "エラー: 未実装です。"
+            else:
+                res = "エラー: コマンドの形式が不正です。"
+            return res
 
     # 全てに該当しない場合
     else:
@@ -162,7 +191,12 @@ def funcHelp(command):
     # Wikiコマンド
     elif command == comWiki:
         return "使用方法: wiki [商品名]\n詳細は以下のドキュメントをご確認ください。\nhttps://qmainconts.f5.si/document/so2bot.html"
+    # 人口密度コマンド
     elif command == comDensity:
         return "使用方法: density [街名] [-p]\n詳細は以下のドキュメントをご確認ください。\nhttps://qmainconts.f5.si/document/so2bot.html"
+    # 店舗情報コマンド
+    elif command == comShop:
+        return "使用方法: shop [-i|-n] [オーナー番号もしくは名前]\n詳細は以下のドキュメントをご確認ください。\nhttps://qmainconts.f5.si/document/so2bot.html"
+    # TODO: verコマンド
     else:
         return "不明なエラーが発生しました。管理者キューマン・エノビクトに問い合わせてください。"

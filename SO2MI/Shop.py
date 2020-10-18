@@ -29,4 +29,4 @@ def funcShopFromID(shopID):
             dl[1] = town[col]["name"]
             break
     
-    return f"店名: {dl[0]}\n所在地: {dl[1]}({dl[2][1]}, {dl[2][2]})\n創業: {dl[3]}日\n称号: {dl[4]}"
+    return f"店名: {dl[0]}\n所在地: {dl[1]}({dl[2][0]}, {dl[2][1]})\n創業: {dl[3]}日\n称号: {dl[4]}"

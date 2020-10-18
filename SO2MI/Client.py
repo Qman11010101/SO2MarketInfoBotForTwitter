@@ -10,7 +10,7 @@ from .Exceptions import NoItemError, NoTownError, NoShopError
 from .Log import logger
 from .Error import errorWrite
 from .Density import funcDensity
-from .Shop import funcShopFromID
+from .Shop import funcShopFromID, funcShopFromName
 
 if os.path.isfile("config.ini"):
     config = ConfigParser()
@@ -170,8 +170,13 @@ def client(text):
                                 res = f"エラー: オーナー番号'{ownerID}'の店舗は見つかりませんでした。"
                         except ValueError:
                             res = "エラー: IDは半角数字で入力してください。"
-                    else:
-                        res = "エラー: 未実装です。"
+                    elif command[1] == "-n":
+                        try:
+                            shopName = command[2]
+                            try:
+                                res = funcShopFromName(ownerID)
+                            except NoShopError:
+                                res = f"エラー: '{shopName}'という名前の店舗は見つかりませんでした。"
             else:
                 res = "エラー: コマンドの形式が不正です。"
             return res

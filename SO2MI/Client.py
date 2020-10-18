@@ -171,12 +171,11 @@ def client(text):
                         except ValueError:
                             res = "エラー: IDは半角数字で入力してください。"
                     elif command[1] == "-n":
+                        shopName = command[2]
                         try:
-                            shopName = command[2]
-                            try:
-                                res = funcShopFromName(ownerID)
-                            except NoShopError:
-                                res = f"エラー: '{shopName}'という名前の店舗は見つかりませんでした。"
+                            res = funcShopFromName(ownerID)
+                        except NoShopError:
+                            res = f"エラー: '{shopName}'という名前の店舗は見つかりませんでした。"
             else:
                 res = "エラー: コマンドの形式が不正です。"
             return res

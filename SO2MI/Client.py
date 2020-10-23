@@ -36,7 +36,7 @@ else:
     comDensity = os.environ.get("density")
     comShop = os.environ.get("shop")
 
-DEFVER = "0.5.1α"
+DEFVER = "0.6α"
 
 def client(text):
     # コマンド文字列パース
@@ -162,6 +162,8 @@ def client(text):
                     res = f"エラー: '{command[1]}'は不正な引数です。"
                 else:
                     if command[1] == "-i":
+                        if command[2].startswith("#"):
+                            command[2] = command[2][1:]
                         try:
                             ownerID = int(command[2])
                             try:

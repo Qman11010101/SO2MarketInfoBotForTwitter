@@ -47,7 +47,7 @@ if __name__ == "__main__":
 
     # メイン関数定義
     def mainfunc():
-        tracker = {"track":f"#{tagStr} OR @{accStr}"}
+        tracker = {"track":f"#{tagStr}"}
         while True:
             resGet = session.post(stream, params=tracker, stream=True)
             for line in resGet.iter_lines():

@@ -42,7 +42,7 @@ DEFVER = "0.6α"
 
 def client(text):
     # コマンド文字列パース
-    command = text.replace(f"#{tagStr}", "").replace(f"@{accStr}", "").replace("\n","").split()
+    command = text.replace(f"#{tagStr}", "").replace("\n","").split()
     
     # 市場情報コマンド
     if command[0] == comMarket:

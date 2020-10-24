@@ -17,6 +17,7 @@ if os.path.isfile("config.ini"):
     config.read("config.ini")
 
     tagStr = config["misc"]["hashtagStr"]
+    accStr = config["misc"]["accountStr"]
 
     comMarket = config["command"]["market"]
     comVersion = config["command"]["version"]
@@ -27,6 +28,7 @@ if os.path.isfile("config.ini"):
     comShop = config["command"]["shop"]
 else:
     tagStr = os.environ.get("hashtagStr")
+    accStr = os.environ.get("accountStr")
 
     comMarket = os.environ.get("market")
     comVersion = os.environ.get("version")
@@ -40,7 +42,7 @@ DEFVER = "0.6α"
 
 def client(text):
     # コマンド文字列パース
-    command = text.replace(f"#{tagStr}", "").replace("\n","").split()
+    command = text.replace(f"#{tagStr}", "").replace(f"@{accStr}", "").replace("\n","").split()
     
     # 市場情報コマンド
     if command[0] == comMarket:

@@ -29,6 +29,7 @@ if os.path.isfile("config.ini"):
     accessTokenSecret = config["keys"]["accessTokenSecret"]
 
     tagStr = config["misc"]["hashtagStr"]
+    accStr = config["misc"]["accountStr"]
 
 else:
     consumerKey = os.environ.get("consumerKey")
@@ -37,6 +38,7 @@ else:
     accessTokenSecret = os.environ.get("accessTokenSecret")
 
     tagStr = os.environ.get("hashtagStr")
+    accStr = os.environ.get("accountStr")
 
 stream = "https://stream.twitter.com/1.1/statuses/filter.json"
 tweet = "https://api.twitter.com/1.1/statuses/update.json"
@@ -78,7 +80,7 @@ if __name__ == "__main__":
 
     # メイン関数定義
     def mainfunc():
-        tracker = {"track":f"#{tagStr}"}
+        tracker = {"track":f"#{tagStr} OR @{accStr}"}
         while True:
             resGet = session.post(stream, params=tracker, stream=True)
             for line in resGet.iter_lines():

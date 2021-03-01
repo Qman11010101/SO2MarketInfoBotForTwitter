@@ -4,7 +4,6 @@
 # Author: Kjuman Enobikto
 # License: MIT License
 
-from configparser import ConfigParser
 import asyncio
 import datetime
 import json
@@ -12,12 +11,13 @@ import os
 import sys
 import threading
 import time
+from configparser import ConfigParser
 
 from requests_oauthlib import OAuth1Session
 
 from SO2MI.Client import client
-from SO2MI.Log import logger
 from SO2MI.Events import funcEvent
+from SO2MI.Log import logger
 
 if os.path.isfile("config.ini"):
     config = ConfigParser()
@@ -47,6 +47,7 @@ if __name__ == "__main__":
 
     # メイン関数定義
     def mainfunc():
+        print("Logged in!")
         tracker = {"track":f"#{tagStr}"}
         while True:
             resGet = session.post(stream, params=tracker, stream=True)

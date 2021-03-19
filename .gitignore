@@ -113,3 +113,4 @@ error-log/
 move.bat
 agenda.json
 event.txt
+cron.py

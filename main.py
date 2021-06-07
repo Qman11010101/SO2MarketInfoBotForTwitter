@@ -48,7 +48,7 @@ if __name__ == "__main__":
     # メイン関数定義
     def mainfunc():
         print("Logged in!")
-        tracker = {"track":f"#{tagStr}"}
+        tracker = {"track": f"#{tagStr}"}
         while True:
             resGet = session.post(stream, params=tracker, stream=True)
             for line in resGet.iter_lines():
@@ -64,7 +64,7 @@ if __name__ == "__main__":
                     if "RT" not in command:
                         reply = client(command)
                         if reply != "":
-                            mention = {"status":reply, "in_reply_to_status_id":tweetId, "auto_populate_reply_metadata":True}
+                            mention = {"status": reply, "in_reply_to_status_id": tweetId, "auto_populate_reply_metadata": True}
                             resPost = session.post(tweet, params=mention)
                             try:
                                 logger(resPost["errors"][0]["message"], "error")

@@ -129,7 +129,7 @@ def client(text):
 
     # ヘルプコマンド
     elif command[0] == comHelp:
-        resStr = f"以下のコマンドが使用可能です:\n{comMarket}\n{comVersion}\n{comHelp}\n{comWiki}\n{comShelves}\n{comDensity}\n{comShop}\n\n各コマンドの詳細は以下のURLを参照してください。\nhttps://qmainconts.f5.si/document/so2bot.html"
+        resStr = f"以下のコマンドが使用可能です:\n{comMarket}\n{comVersion}\n{comHelp}\n{comWiki}\n{comShelves}\n{comDensity}\n{comShop}\n\n各コマンドの詳細は以下のURLを参照してください。\nhttps://qmainconts.dev/document/so2bot.html"
         return resStr
 
     # 人口密度コマンド
@@ -195,15 +195,15 @@ def client(text):
 def funcHelp(command):
     # 市場情報コマンド
     if command == comMarket:
-        return "使用方法: market [商品名] [-r] [-t 街名]\n詳細は以下のドキュメントをご確認ください。\nhttps://qmainconts.f5.si/document/so2bot.html"
+        return "使用方法: market [商品名] [-r] [-t 街名]\n詳細は以下のドキュメントをご確認ください。\nhttps://qmainconts.dev/document/so2bot.html"
     # Wikiコマンド
     elif command == comWiki:
-        return "使用方法: wiki [商品名]\n詳細は以下のドキュメントをご確認ください。\nhttps://qmainconts.f5.si/document/so2bot.html"
+        return "使用方法: wiki [商品名]\n詳細は以下のドキュメントをご確認ください。\nhttps://qmainconts.dev/document/so2bot.html"
     # 人口密度コマンド
     elif command == comDensity:
-        return "使用方法: density [街名] [-p]\n詳細は以下のドキュメントをご確認ください。\nhttps://qmainconts.f5.si/document/so2bot.html"
+        return "使用方法: density [街名] [-p]\n詳細は以下のドキュメントをご確認ください。\nhttps://qmainconts.dev/document/so2bot.html"
     # 店舗情報コマンド
     elif command == comShop:
-        return "使用方法: shop [-i|-n] [オーナー番号もしくは名前]\n詳細は以下のドキュメントをご確認ください。\nhttps://qmainconts.f5.si/document/so2bot.html"
+        return "使用方法: shop [-i|-n] [オーナー番号もしくは名前]\n詳細は以下のドキュメントをご確認ください。\nhttps://qmainconts.dev/document/so2bot.html"
     else:
         return "不明なエラーが発生しました。管理者キューマン・エノビクトに問い合わせてください。"

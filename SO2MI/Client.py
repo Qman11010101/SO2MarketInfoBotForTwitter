@@ -1,7 +1,6 @@
 from configparser import ConfigParser
 import os
 import re
-from textwrap import dedent
 
 from .Market import funcMarket
 from .Wiki import funcWiki

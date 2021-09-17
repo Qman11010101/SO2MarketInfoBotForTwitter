@@ -1,7 +1,5 @@
 from configparser import ConfigParser
-import datetime
 import os
-import sys
 import logging
 
 if os.path.isfile("config.ini"):

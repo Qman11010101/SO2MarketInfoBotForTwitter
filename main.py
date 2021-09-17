@@ -4,19 +4,14 @@
 # Author: Kjuman Enobikto
 # License: MIT License
 
-import asyncio
-import datetime
 import json
 import os
-import sys
-import threading
 import time
 from configparser import ConfigParser
 
 from requests_oauthlib import OAuth1Session
 
 from SO2MI.Client import client
-from SO2MI.Events import funcEvent
 from SO2MI.Log import logger
 
 if os.path.isfile("config.ini"):

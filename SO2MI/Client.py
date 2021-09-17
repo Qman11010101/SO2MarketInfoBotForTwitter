@@ -42,8 +42,8 @@ DEFVER = "0.6α"
 
 def client(text):
     # コマンド文字列パース
-    command = text.replace(f"#{tagStr}", "").replace("\n","").split()
-    
+    command = text.replace(f"#{tagStr}", "").replace("\n", "").split()
+
     # 市場情報コマンド
     if command[0] == comMarket:
         if len(command) == 1:
@@ -79,10 +79,10 @@ def client(text):
                         # 第4引数を参照して引数の形でなければ街を参照したと見做す
                         if not re.match(r"^(-[a-zA-Z]|--[a-zA-Z]+)$", command[5]):
                             return "エラー: 引数-tに対して街を複数指定することはできません。"
-                
+
         try:
             parseRes = funcMarket(command[1], command[2], command[4])
-            if parseRes != False:
+            if parseRes:
                 res = parseRes
             else:
                 res = f"エラー: 「{command[1]}」は見つかりませんでした。"
@@ -151,7 +151,7 @@ def client(text):
             res = "不明なエラーが発生しました。管理者キューマン・エノビクトに問い合わせてください。"
         finally:
             return res
-    
+
     # 店舗情報コマンド
     elif command[0] == comShop:
         if len(command) == 1:

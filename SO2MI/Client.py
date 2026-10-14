@@ -123,7 +123,7 @@ def client(text):
 
     # バージョンコマンド
     elif command[0] == comVersion:
-        resStr = f"SOLD OUT 2 市場情報bot for Twitter\nバージョン: {DEFVER}\n開発者/管理者: キューマン・エノビクト"
+        resStr = f"SOLD OUT 2 市場情報bot for Twitter\nVersion {DEFVER}\n開発者/管理者: キューマン・エノビクト"
         return resStr
 
     # ヘルプコマンド
